@@ -8,6 +8,14 @@
 	
 	<script type="text/paperscript" canvas="myCanvas">
 
+		var text = new PointText({
+			point: view.center,
+			content: '[click to start]',
+			justification: 'center',
+			fontSize: 15,
+			fillColor: 'white'
+		});
+
 		var keyData = {
 			q: {
 				sound: new Howl({
@@ -170,6 +178,9 @@
 		var circles = []; 
 
 		function onKeyDown(event) {
+			if(text.content != '') {
+				text.content = '';
+			}
 			if(keyData[event.key]) {
 				var maxPoint = new Point(view.size.width, view.size.height);
 				var randomPoint = Point.random();
@@ -189,6 +200,12 @@
 					circles[i].remove();
 					circles.splice(i, 1);
 				}
+			}
+		}
+		
+		function onMouseDown(event) {
+			if(text.content = '[click to start]') {
+				text.content = '[type away]';
 			}
 		}
 
